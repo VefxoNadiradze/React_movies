@@ -5,6 +5,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Movies from "./Pages/Movies";
 import Home from "./Pages/Home";
+import { Provider } from "react-redux";
+import store from "./Redux/store";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Global />
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <Global />
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
