@@ -48,7 +48,7 @@ export default function Home() {
 }
 const SliderSection = styled.section`
   height: 75vh;
-  padding: 0 30px;
+  padding: 0px 20px 0px 0px;
   margin: 0 auto;
   border-radius: 10px;
 
