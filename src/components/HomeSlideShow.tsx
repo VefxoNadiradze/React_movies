@@ -47,12 +47,15 @@ export default function Home() {
   );
 }
 const SliderSection = styled.section`
-  height: 90vh;
-  width: 100%;
+  height: 75vh;
+  padding: 0 30px;
+  margin: 0 auto;
+  border-radius: 10px;
 
   .swiper {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
   }
 
   .swiper-slide {
