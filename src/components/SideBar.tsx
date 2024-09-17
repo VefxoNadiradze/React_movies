@@ -21,7 +21,7 @@ export default function SideBar() {
           </Link>
         </li>
         <li>
-          <Link to={"/"}>
+          <Link to={"/Shows"}>
             <BiSolidMovie />
             Shows
           </Link>

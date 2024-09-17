@@ -2,32 +2,32 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../Redux/store";
 import { useEffect } from "react";
-import { getMovieData } from "../Redux/MovieData";
+import { getShowsData } from "../Redux/ShowsData";
 import styled from "styled-components";
 
 export default function Movies() {
   const dispatch = useDispatch<AppDispatch>();
-  const movies = useSelector((store: RootState) => store.Movies.data);
+  const shows = useSelector((store: RootState) => store.Shows.data);
 
   useEffect(() => {
-    dispatch(getMovieData());
+    dispatch(getShowsData());
   }, []);
   return (
-    <MoviesParent>
-      {movies.map((movie) => {
+    <ShowsParent>
+      {shows.map((show) => {
         return (
-          <div className="movieCart">
+          <div className="showsCart">
             <div className="imageParent">
-              <img src={movie.large_cover_image} alt="" />
+              <img src={show.image.medium} alt="" />
             </div>
           </div>
         );
       })}
-    </MoviesParent>
+    </ShowsParent>
   );
 }
 
-const MoviesParent = styled.section`
+const ShowsParent = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   height: 30vh;

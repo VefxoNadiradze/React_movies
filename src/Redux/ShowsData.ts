@@ -58,7 +58,7 @@ interface Show {
 export const getShowsData = createAsyncThunk("getShowsData", async () => {
   const response = await fetch("https://api.tvmaze.com/shows");
   const data = await response.json();
-  return data.slice(0, 51);
+  return data.slice(0, 61);
 });
 
 interface ShowDataI {

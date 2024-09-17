@@ -7,6 +7,7 @@ import Movies from "./Pages/Movies";
 import Home from "./Pages/Home";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
+import Shows from "./Pages/Shows";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/Movies",
         element: <Movies />,
+      },
+      {
+        path: "/Shows",
+        element: <Shows />,
       },
     ],
   },

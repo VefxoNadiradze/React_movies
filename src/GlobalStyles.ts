@@ -10,6 +10,5 @@ export const Global = createGlobalStyle`
 
   body{
     font-family: "SUSE", sans-serif;
-
     }
 `;
