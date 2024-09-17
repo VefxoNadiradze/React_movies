@@ -7,13 +7,22 @@ export default function Layout() {
   return (
     <div>
       <Header />
-      <ContentParent>
+      <ContentParentSidebar>
         <SideBar />
-        <Outlet />
-      </ContentParent>
+
+        <ContentParent>
+          <Outlet />
+        </ContentParent>
+      </ContentParentSidebar>
     </div>
   );
 }
-const ContentParent = styled.section`
+const ContentParentSidebar = styled.section`
   display: flex;
+`;
+
+const ContentParent = styled.div`
+  flex-grow: 1;
+  padding: 20px;
+  width: calc(100% - 90px);
 `;
