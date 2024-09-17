@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import MovieData from "./MovieData";
+import ShowsData from "./ShowsData";
 
 const store = configureStore({
   reducer: {
     Movies: MovieData,
+    Shows: ShowsData,
   },
 });
 

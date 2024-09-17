@@ -33,10 +33,9 @@ export default function SideBar() {
 
 const SidebarComponent = styled.div`
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   padding: 13px;
   width: 90px;
-
   ul {
     position: sticky;
     top: 35%;
