@@ -36,6 +36,7 @@ const SidebarComponent = styled.div`
   min-height: 100vh;
   padding: 13px;
   width: 90px;
+
   ul {
     position: sticky;
     top: 35%;

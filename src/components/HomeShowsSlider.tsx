@@ -53,14 +53,13 @@ export default function HomeShowsSlider() {
 
 const HomeShowsSliderComponent = styled.div`
   margin-top: 100px;
-  height: 50vh;
 
   .title {
     margin-bottom: 20px;
   }
   .swiper {
     width: 100%;
-    height: 100%;
+    height: 50vh;
   }
 
   .swiper-slide {
@@ -105,7 +104,7 @@ const HomeShowsSliderComponent = styled.div`
       position: absolute;
       top: 0;
       left: 0;
-      height: 100vh;
+      height: 100%;
       width: 100%;
       background-color: #00000080;
       z-index: 5;

@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 
 export default function Layout() {
   return (
-    <div>
+    <>
       <Header />
       <ContentParentSidebar>
         <SideBar />
@@ -14,15 +14,16 @@ export default function Layout() {
           <Outlet />
         </ContentParent>
       </ContentParentSidebar>
-    </div>
+    </>
   );
 }
+
 const ContentParentSidebar = styled.section`
+  min-height: 100vh;
   display: flex;
 `;
 
 const ContentParent = styled.div`
-  flex-grow: 1;
   padding: 20px;
   width: calc(100% - 90px);
 `;

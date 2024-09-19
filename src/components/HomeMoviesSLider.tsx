@@ -20,7 +20,7 @@ export default function HomeMoviesSLider() {
   }, []);
 
   let popularMovies = movieData.filter(
-    (movie) => movie.rating > 7 && movie.language === "en"
+    (movie) => movie.rating > 6.5 && movie.language === "en"
   );
 
   let homeSLiderMovies = popularMovies.slice(0, 10);
@@ -54,7 +54,6 @@ export default function HomeMoviesSLider() {
 
 const HomeMovieSliderComponent = styled.div`
   margin-top: 100px;
-  height: 50vh;
 
   .title {
     margin-bottom: 20px;
@@ -109,7 +108,7 @@ const HomeMovieSliderComponent = styled.div`
       position: absolute;
       top: 0;
       left: 0;
-      height: 100vh;
+      height: 100%;
       width: 100%;
       background-color: #00000080;
       z-index: 5;
