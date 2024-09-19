@@ -8,6 +8,8 @@ import Home from "./Pages/Home";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 import Shows from "./Pages/Shows";
+import SingleMovie from "./Pages/SingleMovie";
+import SingleShow from "./Pages/SingleShow";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/Shows",
         element: <Shows />,
+      },
+      {
+        path: "/Movies/movie/:id",
+        element: <SingleMovie />,
+      },
+      {
+        path: "/Shows/show/:id",
+        element: <SingleShow />,
       },
     ],
   },

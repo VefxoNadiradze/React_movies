@@ -17,7 +17,7 @@ export default function Movies() {
   }, []);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [perPage] = useState<number>(8);
+  const [perPage] = useState<number>(16);
 
   const lastPostIndex = currentPage * perPage;
   const firstPostIndex = lastPostIndex - perPage;
@@ -27,9 +27,9 @@ export default function Movies() {
       <MoviesParent>
         {currentPosts.map((movie) => {
           return (
-            <div className="movieCart">
+            <div key={movie.id} className="movieCart">
               <div className="imageParent">
-                <Link className="LinkBtn" to={"/Movies"}>
+                <Link className="LinkBtn" to={`/Movies/movie/${movie.id}`}>
                   <FaCirclePlay />
                 </Link>
 
