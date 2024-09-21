@@ -49,15 +49,20 @@ export default function RecomendedMovies() {
 
 const Title = styled.h2`
   color: #ff4343;
-  margin-top: 20px;
+  background-color: black;
+  padding: 10px 20px;
 `;
 
 const RecomendedMoviesParent = styled.div`
+  background-color: black;
+  padding: 20px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
   gap: 20px;
-  margin: 20px auto 0px auto;
+  margin: 0 auto;
   .imageParent {
     position: relative;
     height: 40vh;

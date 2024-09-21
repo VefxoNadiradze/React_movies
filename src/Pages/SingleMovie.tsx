@@ -21,7 +21,7 @@ export default function SingleMovie() {
   return (
     <>
       <SingleMovieParentComponent
-        bgImage={
+        bgimage={
           singleMovie?.background_image_original || "/path/to/default-image.jpg"
         }
       >
@@ -36,7 +36,7 @@ export default function SingleMovie() {
               <h3>Genre:</h3>
               <div className="genres">
                 {singleMovie?.genres.map((genre) => {
-                  return <p>{genre}</p>;
+                  return <p key={genre}>{genre}</p>;
                 })}
               </div>
             </div>
@@ -60,15 +60,27 @@ export default function SingleMovie() {
   );
 }
 
-const SingleMovieParentComponent = styled.div<{ bgImage: string }>`
+const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
+  position: relative;
   display: flex;
   align-items: center;
-  background-image: url(${(props) => props.bgImage});
+  background-image: url(${(props) => props.bgimage});
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  border-radius: 5px;
+
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 100%);
+  }
   .img-textParent {
     margin-top: 50px;
     display: flex;
