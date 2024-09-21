@@ -10,16 +10,17 @@ import { RootState, AppDispatch } from "../Redux/store";
 import { useEffect } from "react";
 import { getShowsData } from "../Redux/ShowsData";
 import { Link } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 export default function HomeShowsSlider() {
   let dispatch = useDispatch<AppDispatch>();
-  let ShowData = useSelector((store: RootState) => store.Shows.data);
+  let ShowData = useSelector((store: RootState) => store.Shows);
 
   useEffect(() => {
     dispatch(getShowsData());
   }, []);
 
-  const popularShows = ShowData.filter(
+  const popularShows = ShowData.data.filter(
     (show) => show.rating.average > 7 && show.language === "English"
   );
 
@@ -27,6 +28,11 @@ export default function HomeShowsSlider() {
 
   return (
     <HomeShowsSliderComponent>
+      {ShowData.isLoading && (
+        <LoadingDiv className="LoadingDiv">
+          <PropagateLoader color="#ff4343" />
+        </LoadingDiv>
+      )}
       <h3 className="title">Popular Shows</h3>
       <Swiper
         speed={1200}
@@ -51,7 +57,14 @@ export default function HomeShowsSlider() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 const HomeShowsSliderComponent = styled.div`
+  position: relative;
   margin-top: 100px;
 
   .title {

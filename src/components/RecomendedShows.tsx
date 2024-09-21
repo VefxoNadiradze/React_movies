@@ -7,6 +7,7 @@ import { getShowsData } from "../Redux/ShowsData";
 
 import { FaCirclePlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 export default function RecomendedShows() {
   const dispatch = useDispatch<AppDispatch>();
@@ -29,6 +30,11 @@ export default function RecomendedShows() {
     <>
       <Title>You might also like</Title>
       <RecomendedShowsParent>
+        {shows.isLoading && (
+          <LoadingDiv className="LoadingDiv">
+            <PropagateLoader color="#ff4343" />
+          </LoadingDiv>
+        )}
         {getFourShows.map((show) => {
           return (
             <div key={show.id} className="showCart">
@@ -47,6 +53,12 @@ export default function RecomendedShows() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 const Title = styled.h2`
   color: #ff4343;
   background-color: black;
@@ -54,6 +66,7 @@ const Title = styled.h2`
 `;
 
 const RecomendedShowsParent = styled.div`
+  position: relative;
   background-color: black;
   padding: 20px;
   border-bottom-left-radius: 25px;

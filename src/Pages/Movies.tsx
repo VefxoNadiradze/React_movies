@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { FaCirclePlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Paginate from "../components/Paginate";
+import { PropagateLoader } from "react-spinners";
 
 export default function Movies() {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +25,12 @@ export default function Movies() {
   const currentPosts = movies.data.slice(firstPostIndex, lastPostIndex);
   return (
     <>
+      {movies.isLoading && (
+        <LoadingDiv className="LoadingDiv">
+          <PropagateLoader color="#ff4343" />
+        </LoadingDiv>
+      )}
+
       <MoviesParent>
         {currentPosts.map((movie) => {
           return (
@@ -50,6 +57,12 @@ export default function Movies() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 const MoviesParent = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);

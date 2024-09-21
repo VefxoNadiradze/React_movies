@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getMovieData } from "../Redux/MovieData";
 import { FaCirclePlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 export default function RecomendedMovies() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,7 +29,13 @@ export default function RecomendedMovies() {
   return (
     <>
       <Title>You might also like</Title>
+
       <RecomendedMoviesParent>
+        {movies.isLoading && (
+          <LoadingDiv className="LoadingDiv">
+            <PropagateLoader color="#ff4343" />
+          </LoadingDiv>
+        )}
         {getFourMovies.map((movie) => {
           return (
             <div key={movie.id} className="movieCart">
@@ -47,6 +54,13 @@ export default function RecomendedMovies() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const Title = styled.h2`
   color: #ff4343;
   background-color: black;
@@ -54,6 +68,8 @@ const Title = styled.h2`
 `;
 
 const RecomendedMoviesParent = styled.div`
+  border: 2px solid red;
+  position: relative;
   background-color: black;
   padding: 20px;
   border-bottom-left-radius: 25px;

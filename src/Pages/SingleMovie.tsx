@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import RecomendedMovies from "../components/RecomendedMovies";
+import { PropagateLoader } from "react-spinners";
 
 export default function SingleMovie() {
   const { id } = useParams();
@@ -25,6 +26,11 @@ export default function SingleMovie() {
           singleMovie?.background_image_original || "/path/to/default-image.jpg"
         }
       >
+        {movies.isLoading && (
+          <LoadingDiv className="LoadingDiv">
+            <PropagateLoader color="#ff4343" />
+          </LoadingDiv>
+        )}
         <div className="img-textParent">
           <div className="imageParent">
             <img src={singleMovie?.large_cover_image} alt="" />
@@ -59,6 +65,13 @@ export default function SingleMovie() {
     </>
   );
 }
+
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
   position: relative;

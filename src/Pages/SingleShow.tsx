@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import RecomendedShows from "../components/RecomendedShows";
+import { PropagateLoader } from "react-spinners";
 export default function SingleShow() {
   const { id } = useParams();
 
@@ -20,6 +21,11 @@ export default function SingleShow() {
   return (
     <>
       <SingleShowParentComponent bgimage={singleShow?.image.original}>
+        {shows.isLoading && (
+          <LoadingDiv className="LoadingDiv">
+            <PropagateLoader color="#ff4343" />
+          </LoadingDiv>
+        )}
         <div className="img-textParent">
           <div className="imageParent">
             <img src={singleShow?.image.original} alt="" />
@@ -55,6 +61,12 @@ export default function SingleShow() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 const SingleShowParentComponent = styled.div<{ bgimage: string | undefined }>`
   position: relative;
   display: flex;

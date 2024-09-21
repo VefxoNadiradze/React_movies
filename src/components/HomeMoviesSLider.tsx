@@ -10,16 +10,17 @@ import { RootState, AppDispatch } from "../Redux/store";
 import { useEffect } from "react";
 import { getMovieData } from "../Redux/MovieData";
 import { Link } from "react-router-dom";
+import { PropagateLoader } from "react-spinners";
 
 export default function HomeMoviesSLider() {
   let dispatch = useDispatch<AppDispatch>();
-  let movieData = useSelector((store: RootState) => store.Movies.data);
+  let movieData = useSelector((store: RootState) => store.Movies);
 
   useEffect(() => {
     dispatch(getMovieData());
   }, []);
 
-  let popularMovies = movieData.filter(
+  let popularMovies = movieData.data.filter(
     (movie) => movie.rating > 6.5 && movie.language === "en"
   );
 
@@ -27,6 +28,11 @@ export default function HomeMoviesSLider() {
 
   return (
     <HomeMovieSliderComponent>
+      {movieData.isLoading && (
+        <LoadingDiv className="LoadingDiv">
+          <PropagateLoader color="#ff4343" />
+        </LoadingDiv>
+      )}
       <h3 className="title">Popular Movies</h3>
       <Swiper
         speed={1200}
@@ -52,7 +58,15 @@ export default function HomeMoviesSLider() {
   );
 }
 
+const LoadingDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const HomeMovieSliderComponent = styled.div`
+  position: relative;
   margin-top: 100px;
 
   .title {
