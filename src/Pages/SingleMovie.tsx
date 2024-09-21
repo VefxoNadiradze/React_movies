@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { getMovieData } from "../Redux/MovieData";
 import { AppDispatch, RootState } from "../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import RecomendedMovies from "../components/RecomendedMovies";
 
 export default function SingleMovie() {
   const { id } = useParams();
@@ -12,13 +14,135 @@ export default function SingleMovie() {
 
   useEffect(() => {
     dispatch(getMovieData());
-  }, []);
+  }, [id]);
 
   const singleMovie = movies.data.find((movie) => movie.id === Number(id));
 
   return (
-    <div>
-      <img src={singleMovie?.large_cover_image} alt="" />
-    </div>
+    <>
+      <SingleMovieParentComponent
+        bgImage={
+          singleMovie?.background_image_original || "/path/to/default-image.jpg"
+        }
+      >
+        <div className="img-textParent">
+          <div className="imageParent">
+            <img src={singleMovie?.large_cover_image} alt="" />
+          </div>
+
+          <div className="textSide">
+            <h2>{singleMovie?.title}</h2>
+            <div className="genresPar">
+              <h3>Genre:</h3>
+              <div className="genres">
+                {singleMovie?.genres.map((genre) => {
+                  return <p>{genre}</p>;
+                })}
+              </div>
+            </div>
+            <div className="description">
+              <h3>story:</h3>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+              alias corporis, ab laudantium repellendus sunt natus illo nihil!
+              A, velit? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Odit, fugit! Lorem ipsum dolor sit amet.
+            </div>
+            <div className="durationPar">
+              <h3>duration:</h3>
+              <p>{singleMovie?.runtime} Min </p>
+            </div>
+          </div>
+        </div>
+      </SingleMovieParentComponent>
+
+      <RecomendedMovies />
+    </>
   );
 }
+
+const SingleMovieParentComponent = styled.div<{ bgImage: string }>`
+  display: flex;
+  align-items: center;
+  background-image: url(${(props) => props.bgImage});
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  border-radius: 5px;
+  .img-textParent {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    .imageParent {
+      height: 60vh;
+      border-radius: 10px;
+      img {
+        height: 100%;
+        border-radius: 10px;
+      }
+    }
+
+    .textSide {
+      padding-left: 30px;
+      padding-top: 10px;
+      width: 50%;
+      background-color: #0000008f;
+      box-shadow: 0px 0px 50px gray;
+      border-radius: 5px;
+      margin-left: 10px;
+
+      h2 {
+        font-size: 30px;
+        margin-bottom: 20px;
+        color: #ff4343;
+      }
+
+      .genresPar {
+        h3 {
+          margin-bottom: 10px;
+          color: #ff4343;
+          border-bottom: 2px solid #ff4343;
+          width: max-content;
+          margin-bottom: 10px;
+        }
+        .genres {
+          display: flex;
+          gap: 10px;
+
+          p {
+            border: 2px solid #ff4343;
+            padding: 5px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #ff4343;
+          }
+        }
+        margin-bottom: 20px;
+      }
+
+      .description {
+        h3 {
+          border-bottom: 2px solid #ff4343;
+          width: max-content;
+          margin-bottom: 10px;
+        }
+        margin-bottom: 10px;
+        font-weight: bold;
+        line-height: 30px;
+        color: #ff4343;
+      }
+      .durationPar {
+        h3 {
+          margin-bottom: 10px;
+          color: #ff4343;
+          border-bottom: 2px solid #ff4343;
+          width: max-content;
+          margin-bottom: 10px;
+        }
+        p {
+          color: #ff4343;
+        }
+      }
+    }
+  }
+`;

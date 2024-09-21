@@ -61,12 +61,12 @@ const PaginateParent = styled.div`
     outline: 2px solid #ff4343;
     color: #ff4343;
     background-color: white;
-    animation: animate 0.5s ease forwards;
+    animation: animate 0.3s ease forwards;
   }
 
   @keyframes animate {
     from {
-      transform: scale(0.3);
+      transform: scale(0.8);
     }
     to {
       transform: scale(1);

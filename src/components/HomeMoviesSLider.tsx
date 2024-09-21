@@ -39,7 +39,7 @@ export default function HomeMoviesSLider() {
             <SwiperSlide key={movie.id}>
               <p className="movieLanguage">{movie.language}</p>
               <p className="movieYear">{movie.year}</p>
-              <Link className="LinkBtn" to={"/Movies"}>
+              <Link className="LinkBtn" to={`/Movies/movie/${movie.id}`}>
                 <FaCirclePlay />
               </Link>
 
@@ -60,10 +60,11 @@ const HomeMovieSliderComponent = styled.div`
   }
   .swiper {
     width: 100%;
-    height: 100%;
+    height: 50vh;
   }
 
   .swiper-slide {
+    height: 100%;
     position: relative;
     text-align: center;
     font-size: 18px;

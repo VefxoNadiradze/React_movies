@@ -38,7 +38,7 @@ export default function HomeShowsSlider() {
           return (
             <SwiperSlide key={show.id}>
               <p>{show.language}</p>
-              <Link className="LinkBtn" to={"/Movies"}>
+              <Link className="LinkBtn" to={`/Shows/show/${show.id}`}>
                 <FaCirclePlay />
               </Link>
 
