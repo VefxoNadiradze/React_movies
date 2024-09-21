@@ -38,7 +38,7 @@ export default function Movies() {
                 <Link className="LinkBtn" to={`/Shows/show/${show.id}`}>
                   <FaCirclePlay />
                 </Link>
-                <img src={show.image.medium} alt="" />
+                <img src={show.image.original} alt="" />
               </div>
             </div>
           );
@@ -111,11 +111,15 @@ const ShowsParent = styled.section`
     }
   }
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1250px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 990px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 651px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `;

@@ -36,9 +36,29 @@ export default function HomeShowsSlider() {
       <h3 className="title">Popular Shows</h3>
       <Swiper
         speed={1200}
-        slidesPerView={4.5}
         spaceBetween={30}
         className="mySwiper"
+        breakpoints={{
+          1200: {
+            slidesPerView: 4.5,
+          },
+          950: {
+            slidesPerView: 3.5,
+          },
+          680: {
+            slidesPerView: 2.5,
+          },
+          445: {
+            slidesPerView: 1.5,
+          },
+          360: {
+            slidesPerView: 1.2,
+          },
+
+          300: {
+            slidesPerView: 1,
+          },
+        }}
       >
         {homeSliderShows.map((show) => {
           return (

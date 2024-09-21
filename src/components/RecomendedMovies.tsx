@@ -121,4 +121,16 @@ const RecomendedMoviesParent = styled.div`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: 1250px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 990px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 651px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
