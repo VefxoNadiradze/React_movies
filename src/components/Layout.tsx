@@ -26,4 +26,9 @@ const ContentParentSidebar = styled.section`
 const ContentParent = styled.div`
   padding: 20px;
   width: calc(100% - 90px);
+
+  @media screen and (max-width: 750px) {
+    width: 100%;
+    padding: 10px;
+  }
 `;

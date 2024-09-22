@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import MovieData from "./MovieData";
 import ShowsData from "./ShowsData";
+import NavigationSlice from "./Navigation";
+import SearchToggleSlice from "./SearchOnOf";
 
 const store = configureStore({
   reducer: {
     Movies: MovieData,
     Shows: ShowsData,
+    Navigate: NavigationSlice,
+    SearchOnOf: SearchToggleSlice,
   },
 });
 

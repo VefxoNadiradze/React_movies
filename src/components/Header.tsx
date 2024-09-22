@@ -4,22 +4,62 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
 import { IoIosSearch } from "react-icons/io";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../Redux/store";
+import { searchOn } from "../Redux/SearchOnOf";
+import { ToggleNavigate } from "../Redux/Navigation";
+import { IoClose } from "react-icons/io5";
 
 export default function Header() {
+  const dispatch = useDispatch<AppDispatch>();
+  const toggle = useSelector((store: RootState) => store.Navigate.navigate);
+  const SearchToggle = useSelector(
+    (store: RootState) => store.SearchOnOf.searchToggle
+  );
+
   return (
-    <HeaderComponent>
+    <HeaderComponent searchon={SearchToggle.toString()}>
+      <GiHamburgerMenu
+        className="hamburger"
+        onClick={() => {
+          dispatch(ToggleNavigate(!toggle));
+        }}
+      />
+
       <Link to="/" className="Logo">
         M<RiMovie2Fill />
         vie
       </Link>
 
-      <form>
-        <input type="text" placeholder="Search..." />
-        <button>
-          <IoIosSearch />
-          Search
+      <button
+        className="OpenSearchBtn"
+        onClick={() => {
+          dispatch(searchOn(true));
+        }}
+      >
+        <IoIosSearch />
+      </button>
+
+      <div className="formParent">
+        <button
+          className="closeSearchBtn"
+          onClick={() => {
+            dispatch(searchOn(false));
+          }}
+        >
+          <IoClose />
         </button>
-      </form>
+
+        <form>
+          <input type="text" placeholder="Search..." />
+          <button>
+            <IoIosSearch />
+            Search
+          </button>
+        </form>
+      </div>
 
       <Link to={"/"} className="autorization">
         Authorization
@@ -29,11 +69,22 @@ export default function Header() {
   );
 }
 
-const HeaderComponent = styled.header`
+const HeaderComponent = styled.header<{ searchon: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 30px;
+
+  .hamburger {
+    font-size: 25px;
+    cursor: pointer;
+    color: #ff4343;
+    display: none;
+
+    @media screen and (max-width: 750px) {
+      display: block;
+    }
+  }
   /* logo styles */
   .Logo {
     display: flex;
@@ -43,41 +94,106 @@ const HeaderComponent = styled.header`
     text-decoration: none;
     color: #ff4343;
     font-weight: bold;
+
+    @media screen and (max-width: 750px) {
+      font-size: 25px;
+    }
   }
 
+  .OpenSearchBtn {
+    font-size: 25px;
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+
+    @media screen and (max-width: 650px) {
+      display: block;
+    }
+
+    svg {
+      color: #ff4343;
+    }
+
+    @media screen and (max-width: 650px) {
+      display: block;
+    }
+  }
   /* form-input styles */
-  form {
+  .formParent {
     position: relative;
     width: 45%;
-    input {
-      padding: 16px 10px;
-      border-radius: 25px;
-      width: 100%;
-      height: 100%;
-      outline: none;
-      font-size: 17px;
+
+    .closeSearchBtn {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      font-size: 38px;
+      color: #ff4343;
+      background-color: transparent;
       border: none;
-      background-color: #f1f1f1;
+      cursor: pointer;
+      display: none;
+
+      @media screen and (max-width: 650px) {
+        display: block;
+      }
     }
 
-    button {
-      position: absolute;
+    @media screen and (max-width: 650px) {
+      position: fixed;
+      z-index: 30;
+      left: 50%;
       top: 50%;
-      right: 5px;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      height: 80%;
-      border-radius: 23px;
-      padding: 5px 18px;
-      font-size: 15px;
-      cursor: pointer;
-      background-color: #ff4343;
-      color: white;
-      border: none;
+      transform: translate(-50%, -50%);
+      height: 100vh;
+      width: 100%;
+      background-color: #00000099;
+      display: ${(props) => (props.searchon === "true" ? "block" : "none")};
+    }
+
+    form {
+      position: relative;
+      width: 100%;
+      input {
+        padding: 16px 10px;
+        border-radius: 25px;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        font-size: 17px;
+        border: none;
+        background-color: #f1f1f1;
+      }
+
+      @media screen and (max-width: 650px) {
+        position: fixed;
+        z-index: 30;
+        width: 90%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      button {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        height: 80%;
+        border-radius: 23px;
+        padding: 5px 18px;
+        font-size: 15px;
+        cursor: pointer;
+        background-color: #ff4343;
+        color: white;
+        border: none;
+      }
     }
   }
-
   /* autorization styles */
 
   .autorization {
@@ -89,6 +205,11 @@ const HeaderComponent = styled.header`
     font-size: 17px;
     font-weight: bold;
     color: #ff4343;
+
+    @media screen and (max-width: 750px) {
+      font-size: 15px;
+      gap: 10px;
+    }
 
     svg {
       font-size: 30px;
