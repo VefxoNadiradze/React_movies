@@ -52,6 +52,11 @@ const SliderSection = styled.section`
   margin: 0 auto;
   border-radius: 10px;
 
+  @media screen and (max-width: 750px) {
+    padding: 0;
+    height: 50vh;
+  }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -73,6 +78,10 @@ const SliderSection = styled.section`
     height: 100%;
     object-fit: cover;
     cursor: grab;
+
+    @media screen and (max-width: 750px) {
+      object-fit: fill;
+    }
   }
 
   .swiper-pagination {
