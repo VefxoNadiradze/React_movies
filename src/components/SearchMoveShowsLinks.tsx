@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getMovieData } from "../Redux/MovieData";
 import { Link } from "react-router-dom";
 import { getShowsData } from "../Redux/ShowsData";
+import { PropagateLoader } from "react-spinners";
 
 interface searchI {
   searchData: string;
@@ -38,6 +39,12 @@ export default function SearchMoveShowsLinks({ searchData }: searchI) {
 
   return (
     <SearchedLinks>
+      {shows.isLoading ||
+        (movies.isLoading && (
+          <LoadingDiv className="L#120202iv">
+            <PropagateLoader color="#ff4343" />
+          </LoadingDiv>
+        ))}
       {filterMovieData.map((movie) => {
         return (
           <Link to={`/Movies/movie/${movie.id}`}>
@@ -60,6 +67,13 @@ export default function SearchMoveShowsLinks({ searchData }: searchI) {
     </SearchedLinks>
   );
 }
+
+const LoadingDiv = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const SearchedLinks = styled.div`
   position: absolute;
