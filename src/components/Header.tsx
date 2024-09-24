@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
-import { IoIosSearch } from "react-icons/io";
+import { IoSearchSharp } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -42,10 +42,17 @@ export default function Header() {
             dispatch(searchOn(true));
           }}
         >
-          <IoIosSearch />
+          <IoSearchSharp />
         </button>
 
-        <div className="formParent">
+        <div
+          className="formParent"
+          onClick={(event) => {
+            event.target !== event.currentTarget
+              ? null
+              : dispatch(searchOn(false));
+          }}
+        >
           <button
             className="closeSearchBtn"
             onClick={() => {
@@ -65,14 +72,14 @@ export default function Header() {
               placeholder="Search..."
             />
             <button>
-              <IoIosSearch />
+              <IoSearchSharp />
               Search
             </button>
           </form>
         </div>
 
         <Link to={"/"} className="autorization">
-          Authorization
+          <span>Authorization</span>
           <FaUserCircle />
         </Link>
 
@@ -98,6 +105,9 @@ const HeaderComponent = styled.header<{ searchon: string }>`
     @media screen and (max-width: 750px) {
       display: block;
     }
+    @media screen and (max-width: 350px) {
+      font-size: 20px;
+    }
   }
   /* logo styles */
   .Logo {
@@ -112,22 +122,27 @@ const HeaderComponent = styled.header<{ searchon: string }>`
     @media screen and (max-width: 750px) {
       font-size: 25px;
     }
+
+    @media screen and (max-width: 350px) {
+      font-size: 20px;
+    }
   }
 
   .OpenSearchBtn {
-    font-size: 25px;
-    display: none;
     background-color: transparent;
     border: none;
-    cursor: pointer;
-    display: none;
-
     @media screen and (max-width: 650px) {
-      display: block;
+      display: flex;
+      align-items: flex-end;
     }
 
     svg {
       color: #ff4343;
+      font-size: 30px;
+
+      @media screen and (max-width: 350px) {
+        font-size: 23px;
+      }
     }
 
     @media screen and (max-width: 650px) {
@@ -186,8 +201,8 @@ const HeaderComponent = styled.header<{ searchon: string }>`
         z-index: 30;
         width: 90%;
         left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        top: 15%;
+        transform: translateX(-50%);
       }
 
       button {
@@ -227,6 +242,12 @@ const HeaderComponent = styled.header<{ searchon: string }>`
 
     svg {
       font-size: 30px;
+    }
+
+    @media screen and (max-width: 430px) {
+      span {
+        display: none;
+      }
     }
   }
 `;

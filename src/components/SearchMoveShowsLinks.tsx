@@ -77,9 +77,9 @@ const LoadingDiv = styled.div`
 
 const SearchedLinks = styled.div`
   position: absolute;
-  left: 40%;
+  left: 50%;
   top: 100%;
-  transform: translateX(-40%);
+  transform: translateX(-50%);
   width: 35%;
   margin: 0 auto;
   display: flex;
@@ -90,6 +90,13 @@ const SearchedLinks = styled.div`
   z-index: 50;
   padding: 20px 10px;
   gap: 30px;
+
+  @media screen and (max-width: 650px) {
+    position: fixed;
+    top: 25%;
+    width: 90%;
+    max-height: 65vh;
+  }
 
   a {
     display: flex;
