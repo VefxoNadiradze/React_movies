@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { RiMovie2Fill } from "react-icons/ri";
@@ -11,6 +10,8 @@ import { RootState, AppDispatch } from "../Redux/store";
 import { searchOn } from "../Redux/SearchOnOf";
 import { ToggleNavigate } from "../Redux/Navigation";
 import { IoClose } from "react-icons/io5";
+import SearchMoveShowsLinks from "./SearchMoveShowsLinks";
+import { useState } from "react";
 
 export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,58 +19,71 @@ export default function Header() {
   const SearchToggle = useSelector(
     (store: RootState) => store.SearchOnOf.searchToggle
   );
+  const [searchData, setSearchData] = useState<string>("");
 
   return (
-    <HeaderComponent searchon={SearchToggle.toString()}>
-      <GiHamburgerMenu
-        className="hamburger"
-        onClick={() => {
-          dispatch(ToggleNavigate(!toggle));
-        }}
-      />
-
-      <Link to="/" className="Logo">
-        M<RiMovie2Fill />
-        vie
-      </Link>
-
-      <button
-        className="OpenSearchBtn"
-        onClick={() => {
-          dispatch(searchOn(true));
-        }}
-      >
-        <IoIosSearch />
-      </button>
-
-      <div className="formParent">
-        <button
-          className="closeSearchBtn"
+    <>
+      <HeaderComponent searchon={SearchToggle.toString()}>
+        <GiHamburgerMenu
+          className="hamburger"
           onClick={() => {
-            dispatch(searchOn(false));
+            dispatch(ToggleNavigate(!toggle));
+          }}
+        />
+
+        <Link to="/" className="Logo">
+          M<RiMovie2Fill />
+          vie
+        </Link>
+
+        <button
+          className="OpenSearchBtn"
+          onClick={() => {
+            dispatch(searchOn(true));
           }}
         >
-          <IoClose />
+          <IoIosSearch />
         </button>
 
-        <form>
-          <input type="text" placeholder="Search..." />
-          <button>
-            <IoIosSearch />
-            Search
+        <div className="formParent">
+          <button
+            className="closeSearchBtn"
+            onClick={() => {
+              dispatch(searchOn(false));
+            }}
+          >
+            <IoClose />
           </button>
-        </form>
-      </div>
 
-      <Link to={"/"} className="autorization">
-        Authorization
-        <FaUserCircle />
-      </Link>
-    </HeaderComponent>
+          <form>
+            <input
+              value={searchData}
+              type="text"
+              onChange={(e) => {
+                setSearchData(e.target.value);
+              }}
+              placeholder="Search..."
+            />
+            <button>
+              <IoIosSearch />
+              Search
+            </button>
+          </form>
+        </div>
+
+        <Link to={"/"} className="autorization">
+          Authorization
+          <FaUserCircle />
+        </Link>
+
+        {searchData && <SearchMoveShowsLinks searchData={searchData} />}
+      </HeaderComponent>
+    </>
   );
 }
 
 const HeaderComponent = styled.header<{ searchon: string }>`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;

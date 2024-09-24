@@ -54,7 +54,7 @@ const SliderSection = styled.section`
 
   @media screen and (max-width: 750px) {
     padding: 0;
-    height: 50vh;
+    height: 43vh;
   }
 
   .swiper {

@@ -59,12 +59,14 @@ interface MovieDataI {
   isLoading: boolean;
   data: Movie[];
   error: boolean;
+  filteredData: Movie[];
 }
 
 const initialState: MovieDataI = {
   isLoading: false,
   data: [],
   error: false,
+  filteredData: [],
 };
 
 const MovieData = createSlice({
