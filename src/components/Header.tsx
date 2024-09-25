@@ -11,15 +11,16 @@ import { searchOn } from "../Redux/SearchOnOf";
 import { ToggleNavigate } from "../Redux/Navigation";
 import { IoClose } from "react-icons/io5";
 import SearchMoveShowsLinks from "./SearchMoveShowsLinks";
-import { useState } from "react";
+import { getInputValue } from "../Redux/SearchData";
 
 export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
   const toggle = useSelector((store: RootState) => store.Navigate.navigate);
+  const InputValue = useSelector((store: RootState) => store.Searching);
+
   const SearchToggle = useSelector(
     (store: RootState) => store.SearchOnOf.searchToggle
   );
-  const [searchData, setSearchData] = useState<string>("");
 
   return (
     <>
@@ -51,12 +52,14 @@ export default function Header() {
             event.target !== event.currentTarget
               ? null
               : dispatch(searchOn(false));
+            dispatch(getInputValue(""));
           }}
         >
           <button
             className="closeSearchBtn"
             onClick={() => {
               dispatch(searchOn(false));
+              dispatch(getInputValue(""));
             }}
           >
             <IoClose />
@@ -64,10 +67,10 @@ export default function Header() {
 
           <form>
             <input
-              value={searchData}
+              value={InputValue.value}
               type="text"
               onChange={(e) => {
-                setSearchData(e.target.value);
+                dispatch(getInputValue(e.target.value));
               }}
               placeholder="Search..."
             />
@@ -83,7 +86,7 @@ export default function Header() {
           <FaUserCircle />
         </Link>
 
-        {searchData && <SearchMoveShowsLinks searchData={searchData} />}
+        {InputValue.value && <SearchMoveShowsLinks />}
       </HeaderComponent>
     </>
   );
@@ -131,6 +134,7 @@ const HeaderComponent = styled.header<{ searchon: string }>`
   .OpenSearchBtn {
     background-color: transparent;
     border: none;
+    display: none;
     @media screen and (max-width: 650px) {
       display: flex;
       align-items: flex-end;

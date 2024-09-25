@@ -7,21 +7,18 @@ import { Link } from "react-router-dom";
 import { getShowsData } from "../Redux/ShowsData";
 import { PropagateLoader } from "react-spinners";
 
-interface searchI {
-  searchData: string;
-}
-
-export default function SearchMoveShowsLinks({ searchData }: searchI) {
+export default function SearchMoveShowsLinks() {
+  const InputValue = useSelector((store: RootState) => store.Searching);
   // Searching Movie Data
   const dispatchMovie = useDispatch<AppDispatch>();
   const movies = useSelector((store: RootState) => store.Movies);
 
   useEffect(() => {
     dispatchMovie(getMovieData());
-  }, [searchData]);
+  }, [InputValue.value]);
 
   let filterMovieData = movies.data.filter((movie) => {
-    return movie.title.toLowerCase().includes(searchData.toLowerCase());
+    return movie.title.toLowerCase().includes(InputValue.value.toLowerCase());
   });
 
   // searching Show data
@@ -33,7 +30,7 @@ export default function SearchMoveShowsLinks({ searchData }: searchI) {
   }, []);
 
   let filterShowsData = shows.data.filter((show) => {
-    return show.name.toLowerCase().includes(searchData.toLowerCase());
+    return show.name.toLowerCase().includes(InputValue.value.toLowerCase());
   });
   /////
 
@@ -47,7 +44,7 @@ export default function SearchMoveShowsLinks({ searchData }: searchI) {
         ))}
       {filterMovieData.map((movie) => {
         return (
-          <Link to={`/Movies/movie/${movie.id}`}>
+          <Link key={movie.id} to={`/Movies/movie/${movie.id}`}>
             <img src={movie.small_cover_image} alt="" />
 
             <p>{movie.title}</p>
@@ -57,7 +54,7 @@ export default function SearchMoveShowsLinks({ searchData }: searchI) {
 
       {filterShowsData.map((show) => {
         return (
-          <Link to={`/Shows/show/${show.id}`}>
+          <Link key={show.id} to={`/Shows/show/${show.id}`}>
             <img className="showImg" src={show.image.medium} alt="" />
 
             <p>{show.name}</p>
@@ -90,6 +87,7 @@ const SearchedLinks = styled.div`
   z-index: 50;
   padding: 20px 10px;
   gap: 30px;
+  box-shadow: 0px 0px 100px gray;
 
   @media screen and (max-width: 650px) {
     position: fixed;

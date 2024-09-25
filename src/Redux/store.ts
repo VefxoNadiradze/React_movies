@@ -3,6 +3,7 @@ import MovieData from "./MovieData";
 import ShowsData from "./ShowsData";
 import NavigationSlice from "./Navigation";
 import SearchToggleSlice from "./SearchOnOf";
+import SearchSlice from "./SearchData";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     Shows: ShowsData,
     Navigate: NavigationSlice,
     SearchOnOf: SearchToggleSlice,
+    Searching: SearchSlice,
   },
 });
 
