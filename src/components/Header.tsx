@@ -51,8 +51,7 @@ export default function Header() {
           onClick={(event) => {
             event.target !== event.currentTarget
               ? null
-              : dispatch(searchOn(false));
-            dispatch(getInputValue(""));
+              : dispatch(searchOn(false)) && dispatch(getInputValue(""));
           }}
         >
           <button

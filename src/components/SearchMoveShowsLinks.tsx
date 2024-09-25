@@ -61,6 +61,13 @@ export default function SearchMoveShowsLinks() {
           </Link>
         );
       })}
+
+      {filterMovieData.length < 1 &&
+        (filterShowsData.length < 1 ? (
+          <p className="noResultsP">No results.</p>
+        ) : (
+          ""
+        ))}
     </SearchedLinks>
   );
 }
@@ -108,5 +115,9 @@ const SearchedLinks = styled.div`
     .showImg {
       height: 67px;
     }
+  }
+
+  .noResultsP {
+    text-align: center;
   }
 `;
