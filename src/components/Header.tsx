@@ -12,12 +12,14 @@ import { ToggleNavigate } from "../Redux/Navigation";
 import { IoClose } from "react-icons/io5";
 import SearchMoveShowsLinks from "./SearchMoveShowsLinks";
 import { getInputValue } from "../Redux/SearchData";
+import { useState } from "react";
 
 export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
   const toggle = useSelector((store: RootState) => store.Navigate.navigate);
   const InputValue = useSelector((store: RootState) => store.Searching);
-
+  // this will activate when search opened on the mobile version
+  const [closeFormPar, setcloseFormPar] = useState<boolean>(false);
   const SearchToggle = useSelector(
     (store: RootState) => store.SearchOnOf.searchToggle
   );
@@ -41,13 +43,14 @@ export default function Header() {
           className="OpenSearchBtn"
           onClick={() => {
             dispatch(searchOn(true));
+            setcloseFormPar(false);
           }}
         >
           <IoSearchSharp />
         </button>
 
         <div
-          className="formParent"
+          className={closeFormPar ? "closeFormParMob formParent" : "formParent"}
           onClick={(event) => {
             event.target !== event.currentTarget
               ? null
@@ -85,7 +88,9 @@ export default function Header() {
           <FaUserCircle />
         </Link>
 
-        {InputValue.value && <SearchMoveShowsLinks />}
+        {InputValue.value && (
+          <SearchMoveShowsLinks setcloseFormPar={setcloseFormPar} />
+        )}
       </HeaderComponent>
     </>
   );
@@ -153,7 +158,9 @@ const HeaderComponent = styled.header<{ searchon: string }>`
     }
   }
   /* form-input styles */
+
   .formParent {
+    display: block;
     position: relative;
     width: 45%;
 
@@ -226,6 +233,13 @@ const HeaderComponent = styled.header<{ searchon: string }>`
       }
     }
   }
+
+  @media screen and (max-width: 650px) {
+    .closeFormParMob {
+      display: none;
+    }
+  }
+
   /* autorization styles */
 
   .autorization {

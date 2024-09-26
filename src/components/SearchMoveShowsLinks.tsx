@@ -8,7 +8,11 @@ import { getShowsData } from "../Redux/ShowsData";
 import { PropagateLoader } from "react-spinners";
 import { getInputValue } from "../Redux/SearchData";
 
-export default function SearchMoveShowsLinks() {
+interface searchI {
+  setcloseFormPar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function SearchMoveShowsLinks({ setcloseFormPar }: searchI) {
   const InputValue = useSelector((store: RootState) => store.Searching);
   // Searching Movie Data
   const dispatch = useDispatch<AppDispatch>();
@@ -46,7 +50,10 @@ export default function SearchMoveShowsLinks() {
           <Link
             key={movie.id}
             to={`/Movies/movie/${movie.id}`}
-            onClick={() => dispatch(getInputValue(""))}
+            onClick={() => {
+              dispatch(getInputValue(""));
+              setcloseFormPar(true);
+            }}
           >
             <img src={movie.small_cover_image} alt="" />
 

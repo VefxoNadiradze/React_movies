@@ -104,7 +104,6 @@ const SingleShowParentComponent = styled.div<{ bgimage: string | undefined }>`
     }
     .imageParent {
       height: 60vh;
-      background-color: red;
 
       @media screen and (max-width: 1135px) {
         width: 30%;
