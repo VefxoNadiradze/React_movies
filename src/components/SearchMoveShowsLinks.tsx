@@ -6,27 +6,26 @@ import { getMovieData } from "../Redux/MovieData";
 import { Link } from "react-router-dom";
 import { getShowsData } from "../Redux/ShowsData";
 import { PropagateLoader } from "react-spinners";
+import { getInputValue } from "../Redux/SearchData";
 
 export default function SearchMoveShowsLinks() {
   const InputValue = useSelector((store: RootState) => store.Searching);
   // Searching Movie Data
-  const dispatchMovie = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const movies = useSelector((store: RootState) => store.Movies);
 
   useEffect(() => {
-    dispatchMovie(getMovieData());
+    dispatch(getMovieData());
   }, [InputValue.value]);
 
   let filterMovieData = movies.data.filter((movie) => {
     return movie.title.toLowerCase().includes(InputValue.value.toLowerCase());
   });
 
-  // searching Show data
-  const dispatchShow = useDispatch<AppDispatch>();
   const shows = useSelector((store: RootState) => store.Shows);
 
   useEffect(() => {
-    dispatchShow(getShowsData());
+    dispatch(getShowsData());
   }, []);
 
   let filterShowsData = shows.data.filter((show) => {
@@ -44,7 +43,11 @@ export default function SearchMoveShowsLinks() {
         ))}
       {filterMovieData.map((movie) => {
         return (
-          <Link key={movie.id} to={`/Movies/movie/${movie.id}`}>
+          <Link
+            key={movie.id}
+            to={`/Movies/movie/${movie.id}`}
+            onClick={() => dispatch(getInputValue(""))}
+          >
             <img src={movie.small_cover_image} alt="" />
 
             <p>{movie.title}</p>
@@ -54,7 +57,11 @@ export default function SearchMoveShowsLinks() {
 
       {filterShowsData.map((show) => {
         return (
-          <Link key={show.id} to={`/Shows/show/${show.id}`}>
+          <Link
+            key={show.id}
+            to={`/Shows/show/${show.id}`}
+            onClick={() => dispatch(getInputValue(""))}
+          >
             <img className="showImg" src={show.image.medium} alt="" />
 
             <p>{show.name}</p>

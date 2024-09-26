@@ -83,9 +83,13 @@ const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
   background-size: cover;
   height: 100vh;
 
+  @media screen and (max-width: 1135px) {
+    padding: 10px;
+  }
+
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  &::after {
+  /* &::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -93,33 +97,74 @@ const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
     right: 0;
     height: 70%;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 100%);
-  }
+  } */
   .img-textParent {
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    @media screen and (max-width: 871px) {
+      flex-direction: column;
+      margin-top: 0;
+      gap: 10px;
+    }
     .imageParent {
       height: 60vh;
+
+      @media screen and (max-width: 1135px) {
+        width: 30%;
+      }
+      @media screen and (max-width: 871px) {
+        width: 70%;
+        height: 45vh;
+        margin: 0 auto;
+      }
+      @media screen and (max-width: 365px) {
+        width: 100%;
+      }
+
       border-radius: 10px;
       img {
         height: 100%;
         border-radius: 10px;
+        @media screen and (max-width: 1135px) {
+          width: 100%;
+        }
+        @media screen and (max-width: 871px) {
+          display: block;
+          margin: 0 auto;
+          width: 70%;
+        }
+        @media screen and (max-width: 490px) {
+          width: 100%;
+        }
       }
     }
 
     .textSide {
       padding-left: 30px;
       padding-top: 10px;
+      padding-bottom: 10px;
       width: 50%;
       background-color: #0000008f;
       box-shadow: 0px 0px 50px gray;
       border-radius: 5px;
       margin-left: 10px;
-
+      @media screen and (max-width: 1135px) {
+        width: 70%;
+      }
+      @media screen and (max-width: 871px) {
+        margin-left: 0;
+        width: 100%;
+        max-height: 50vh;
+        overflow: auto;
+      }
       h2 {
         font-size: 30px;
         margin-bottom: 20px;
         color: #ff4343;
+        @media screen and (max-width: 1135px) {
+          font-size: 25px;
+        }
       }
 
       .genresPar {
@@ -133,6 +178,9 @@ const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
         .genres {
           display: flex;
           gap: 10px;
+          @media screen and (max-width: 430px) {
+            flex-wrap: wrap;
+          }
 
           p {
             border: 2px solid #ff4343;
@@ -155,6 +203,10 @@ const SingleMovieParentComponent = styled.div<{ bgimage: string }>`
         font-weight: bold;
         line-height: 30px;
         color: #ff4343;
+        @media screen and (max-width: 1135px) {
+          line-height: 25px;
+          font-size: 14px;
+        }
       }
       .durationPar {
         h3 {
