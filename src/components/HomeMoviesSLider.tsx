@@ -148,6 +148,15 @@ const HomeMovieSliderComponent = styled.div`
     &:hover:after {
       opacity: 1;
     }
+
+    @media screen and (max-width: 1024px) {
+      .LinkBtn {
+        opacity: 1;
+      }
+      &::after {
+        opacity: 1;
+      }
+    }
   }
 
   .swiper-slide img {
