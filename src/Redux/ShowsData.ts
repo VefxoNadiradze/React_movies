@@ -65,18 +65,30 @@ interface ShowDataI {
   isLoading: boolean;
   data: Show[];
   error: boolean;
+  filteredData: Show[];
 }
 
 const initialState: ShowDataI = {
   isLoading: false,
   data: [],
   error: false,
+  filteredData: [],
 };
 
 const ShowsData = createSlice({
   name: "Shows",
   initialState,
-  reducers: {},
+  reducers: {
+    FilterShows: (state, action) => {
+      if (action.payload === "All genres") {
+        state.filteredData = state.data;
+      } else {
+        state.filteredData = state.data.filter((shows) => {
+          return shows.genres && shows.genres.includes(action.payload);
+        });
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getShowsData.pending, (state) => {
       state.isLoading = true;
@@ -84,6 +96,7 @@ const ShowsData = createSlice({
     builder.addCase(getShowsData.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      state.filteredData = action.payload;
     });
     builder.addCase(getShowsData.rejected, (state) => {
       state.error = true;
@@ -92,3 +105,4 @@ const ShowsData = createSlice({
 });
 
 export default ShowsData.reducer;
+export const { FilterShows } = ShowsData.actions;

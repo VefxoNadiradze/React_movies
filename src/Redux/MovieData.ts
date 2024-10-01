@@ -73,11 +73,9 @@ const MovieData = createSlice({
   name: "Movies",
   initialState,
   reducers: {
-    FilterGenres: (state, action) => {
+    FilterMovies: (state, action) => {
       if (action.payload === "All genres") {
         state.filteredData = state.data;
-
-        console.log(state.filteredData);
       } else {
         state.filteredData = state.data.filter((movies) => {
           return movies.genres && movies.genres.includes(action.payload);
@@ -101,4 +99,4 @@ const MovieData = createSlice({
 });
 
 export default MovieData.reducer;
-export const { FilterGenres } = MovieData.actions;
+export const { FilterMovies } = MovieData.actions;

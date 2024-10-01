@@ -1,17 +1,22 @@
 import styled from "styled-components";
-import { FilterGenres } from "../Redux/MovieData";
+import { FilterMovies } from "../Redux/MovieData";
+import { FilterShows } from "../Redux/ShowsData";
 import { AppDispatch } from "../Redux/store";
 import { useDispatch } from "react-redux";
+
 export default function FilterData() {
   const dispatch = useDispatch<AppDispatch>();
 
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedGenre = event.target.value;
+
+    dispatch(FilterMovies(selectedGenre));
+    dispatch(FilterShows(selectedGenre));
+  };
+
   return (
     <FilterParent>
-      <select
-        onChange={(event) => dispatch(FilterGenres(event.target.value))}
-        className="genres"
-        id="age"
-      >
+      <select onChange={handleFilterChange} className="genres" id="age">
         <option value="All genres">All genres</option>
         <option value="Action">Action</option>
         <option value="Adventure">Adventure</option>
