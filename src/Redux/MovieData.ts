@@ -72,7 +72,19 @@ const initialState: MovieDataI = {
 const MovieData = createSlice({
   name: "Movies",
   initialState,
-  reducers: {},
+  reducers: {
+    FilterGenres: (state, action) => {
+      if (action.payload === "All genres") {
+        state.filteredData = state.data;
+
+        console.log(state.filteredData);
+      } else {
+        state.filteredData = state.data.filter((movies) => {
+          return movies.genres && movies.genres.includes(action.payload);
+        });
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getMovieData.pending, (state) => {
       state.isLoading = true;
@@ -80,6 +92,7 @@ const MovieData = createSlice({
     builder.addCase(getMovieData.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      state.filteredData = action.payload;
     });
     builder.addCase(getMovieData.rejected, (state) => {
       state.error = true;
@@ -88,3 +101,4 @@ const MovieData = createSlice({
 });
 
 export default MovieData.reducer;
+export const { FilterGenres } = MovieData.actions;

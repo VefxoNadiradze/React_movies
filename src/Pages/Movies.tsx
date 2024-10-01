@@ -8,6 +8,7 @@ import { FaCirclePlay } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import { PropagateLoader } from "react-spinners";
+import FilterData from "../components/FilterData";
 
 export default function Movies() {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,9 +23,11 @@ export default function Movies() {
 
   const lastPostIndex = currentPage * perPage;
   const firstPostIndex = lastPostIndex - perPage;
-  const currentPosts = movies.data.slice(firstPostIndex, lastPostIndex);
+  let currentPosts = movies.filteredData.slice(firstPostIndex, lastPostIndex);
+
   return (
     <>
+      <FilterData />
       {movies.isLoading && (
         <LoadingDiv className="LoadingDiv">
           <PropagateLoader color="#ff4343" />
