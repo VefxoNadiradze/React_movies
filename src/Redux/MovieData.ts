@@ -73,7 +73,7 @@ const MovieData = createSlice({
   name: "Movies",
   initialState,
   reducers: {
-    FilterMovies: (state, action) => {
+    FilterMoviesGenres: (state, action) => {
       if (action.payload === "All genres") {
         state.filteredData = state.data;
       } else {
@@ -81,6 +81,17 @@ const MovieData = createSlice({
           return movies.genres && movies.genres.includes(action.payload);
         });
       }
+    },
+    FilterMoviesYear: (state, action) => {
+      state.filteredData = state.data.filter((movies) => {
+        if (action.payload.minPrice == "" && action.payload.maxPrice == "") {
+          return (state.filteredData = state.data);
+        }
+        return (
+          movies.year >= action.payload.minPrice &&
+          movies.year <= action.payload.maxPrice
+        );
+      });
     },
   },
   extraReducers: (builder) => {
@@ -99,4 +110,4 @@ const MovieData = createSlice({
 });
 
 export default MovieData.reducer;
-export const { FilterMovies } = MovieData.actions;
+export const { FilterMoviesGenres, FilterMoviesYear } = MovieData.actions;

@@ -88,6 +88,17 @@ const ShowsData = createSlice({
         });
       }
     },
+    FilterShowsYear: (state, action) => {
+      state.filteredData = state.data.filter((movies) => {
+        if (action.payload.minPrice == "" && action.payload.maxPrice == "") {
+          return (state.filteredData = state.data);
+        }
+        return (
+          Number(movies.premiered.slice(0, 4)) >= action.payload.minPrice &&
+          Number(movies.premiered.slice(0, 4)) <= action.payload.maxPrice
+        );
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getShowsData.pending, (state) => {
@@ -105,4 +116,4 @@ const ShowsData = createSlice({
 });
 
 export default ShowsData.reducer;
-export const { FilterShows } = ShowsData.actions;
+export const { FilterShows, FilterShowsYear } = ShowsData.actions;

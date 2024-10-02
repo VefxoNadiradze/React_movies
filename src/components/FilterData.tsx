@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { FilterMovies } from "../Redux/MovieData";
-import { FilterShows } from "../Redux/ShowsData";
+import { FilterMoviesGenres, FilterMoviesYear } from "../Redux/MovieData";
+import { FilterShows, FilterShowsYear } from "../Redux/ShowsData";
 import { AppDispatch } from "../Redux/store";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function FilterData() {
   const dispatch = useDispatch<AppDispatch>();
@@ -10,12 +11,21 @@ export default function FilterData() {
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGenre = event.target.value;
 
-    dispatch(FilterMovies(selectedGenre));
+    dispatch(FilterMoviesGenres(selectedGenre));
     dispatch(FilterShows(selectedGenre));
   };
 
+  const [toggleInputs, setToggleInputs] = useState<boolean>(false);
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
+
+  useEffect(() => {
+    dispatch(FilterMoviesYear({ minPrice, maxPrice }));
+    dispatch(FilterShowsYear({ minPrice, maxPrice }));
+  }, [minPrice, maxPrice]);
+
   return (
-    <FilterParent>
+    <FilterParent onClick={() => setToggleInputs(false)}>
       <select onChange={handleFilterChange} className="genres" id="age">
         <option value="All genres">All genres</option>
         <option value="Action">Action</option>
@@ -41,9 +51,79 @@ export default function FilterData() {
         <option value="War">War</option>
         <option value="Western">Western</option>
       </select>
+
+      <FilterByYearParent>
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            setToggleInputs(!toggleInputs);
+          }}
+        >
+          Year released
+        </button>
+
+        <form
+          onClick={(event) => event.stopPropagation()}
+          className={toggleInputs ? "showForms" : ""}
+        >
+          <input
+            onChange={(event) => setMinPrice(Number(event.target.value))}
+            type="number"
+            min={0}
+          />
+          <input
+            onChange={(event) => setMaxPrice(Number(event.target.value))}
+            type="number"
+            min={0}
+          />
+        </form>
+      </FilterByYearParent>
     </FilterParent>
   );
 }
+
+const FilterByYearParent = styled.div`
+  position: relative;
+  button {
+    cursor: pointer;
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 2px;
+  }
+
+  form {
+    position: absolute;
+    gap: 5px;
+    z-index: 10;
+    left: 50%;
+    top: 130%;
+    padding: 10px;
+    background-color: #000000c1;
+    display: none;
+    transform: translate(-50%, -10px);
+
+    input {
+      width: 75px;
+      padding: 5px;
+    }
+  }
+
+  .showForms {
+    display: flex;
+    animation: formAnimate 0.5s ease forwards;
+  }
+
+  @keyframes formAnimate {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -10px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0px);
+    }
+  }
+`;
 
 const FilterParent = styled.div`
   display: flex;
