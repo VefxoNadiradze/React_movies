@@ -48,4 +48,5 @@ export default function FilterData() {
 const FilterParent = styled.div`
   display: flex;
   gap: 30px;
+  margin-bottom: 10px;
 `;

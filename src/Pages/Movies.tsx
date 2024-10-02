@@ -35,23 +35,27 @@ export default function Movies() {
       )}
 
       <MoviesParent>
-        {currentPosts.map((movie) => {
-          return (
-            <div key={movie.id} className="movieCart">
-              <div className="imageParent">
-                <Link className="LinkBtn" to={`/Movies/movie/${movie.id}`}>
-                  <FaCirclePlay />
-                </Link>
+        {currentPosts.length > 0 ? (
+          currentPosts.map((movie) => {
+            return (
+              <div key={movie.id} className="movieCart">
+                <div className="imageParent">
+                  <Link className="LinkBtn" to={`/Movies/movie/${movie.id}`}>
+                    <FaCirclePlay />
+                  </Link>
 
-                <img src={movie.large_cover_image} alt="" />
+                  <img src={movie.large_cover_image} alt="" />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <NotFound>Movie not found</NotFound>
+        )}
       </MoviesParent>
 
       <Paginate
-        dataLength={movies.data.length}
+        dataLength={movies.filteredData.length}
         perPage={perPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
@@ -60,11 +64,21 @@ export default function Movies() {
   );
 }
 
+const NotFound = styled.p`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+`;
+
 const LoadingDiv = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 10px 10px 100px gray;
+  z-index: 10;
 `;
 const MoviesParent = styled.section`
   display: grid;

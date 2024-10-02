@@ -34,21 +34,25 @@ export default function Movies() {
         </LoadingDiv>
       )}
       <ShowsParent>
-        {currentPosts.map((show) => {
-          return (
-            <div key={show.id} className="showsCart">
-              <div className="imageParent">
-                <Link className="LinkBtn" to={`/Shows/show/${show.id}`}>
-                  <FaCirclePlay />
-                </Link>
-                <img src={show.image.original} alt="" />
+        {currentPosts.length > 0 ? (
+          currentPosts.map((show) => {
+            return (
+              <div key={show.id} className="showsCart">
+                <div className="imageParent">
+                  <Link className="LinkBtn" to={`/Shows/show/${show.id}`}>
+                    <FaCirclePlay />
+                  </Link>
+                  <img src={show.image.original} alt="" />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <NotFound>Show not found</NotFound>
+        )}
       </ShowsParent>
       <Paginate
-        dataLength={shows.data.length}
+        dataLength={shows.filteredData.length}
         perPage={perPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
@@ -57,11 +61,21 @@ export default function Movies() {
   );
 }
 
+const NotFound = styled.p`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+`;
+
 const LoadingDiv = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 10px 10px 100px gray;
+  z-index: 10;
 `;
 
 const ShowsParent = styled.section`
