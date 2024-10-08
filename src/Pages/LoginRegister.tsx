@@ -1,15 +1,25 @@
 import styled from "styled-components";
 import SignIn from "../components/SignIn";
+import { useParams } from "react-router-dom";
+import SignUp from "../components/SignUp";
 export default function LoginRegister() {
+  const { sign_in } = useParams();
+
   return (
     <AuthorizationParent>
-      <SignIn />
+      <Authorization>
+        {sign_in === "sign_in" ? <SignIn /> : <SignUp />}
+      </Authorization>
     </AuthorizationParent>
   );
 }
 
 const AuthorizationParent = styled.div`
-  background-color: red;
+  background-color: #1a1c22;
+  height: 100vh;
+`;
+
+const Authorization = styled.div`
   width: 70%;
   position: fixed;
   top: 50%;
