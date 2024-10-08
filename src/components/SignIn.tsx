@@ -65,6 +65,9 @@ const HomeLinkPar = styled.div`
     color: #ff4343;
     text-decoration: none;
     font-size: 17px;
+    @media screen and (max-width: 400px) {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -74,6 +77,10 @@ const PageName = styled.h2`
   left: 50%;
   transform: translateX(-50%);
   color: #ff4343;
+
+  @media screen and (max-width: 400px) {
+    font-size: 17px;
+  }
 `;
 
 const SignInParent = styled.div`

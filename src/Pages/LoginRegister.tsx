@@ -16,13 +16,14 @@ export default function LoginRegister() {
 
 const AuthorizationParent = styled.div`
   background-color: #1a1c22;
-  height: 100vh;
+  min-height: 100vh;
+  overflow: auto;
 `;
 
 const Authorization = styled.div`
   width: 70%;
   position: fixed;
-  top: 50%;
+  top: 59%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

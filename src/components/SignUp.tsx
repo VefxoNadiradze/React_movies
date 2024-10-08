@@ -64,7 +64,7 @@ const HomeLinkPar = styled.div`
   top: -50px;
 
   @media screen and (max-width: 400px) {
-    top: -80px;
+    top: -63px;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -76,6 +76,10 @@ const HomeLinkPar = styled.div`
     color: #ff4343;
     text-decoration: none;
     font-size: 17px;
+
+    @media screen and (max-width: 400px) {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -85,6 +89,11 @@ const PageName = styled.h2`
   left: 50%;
   transform: translateX(-50%);
   color: #ff4343;
+
+  @media screen and (max-width: 400px) {
+    font-size: 17px;
+    top: -37px;
+  }
 `;
 
 const SignInParent = styled.div`
@@ -95,6 +104,10 @@ const SignInParent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
+
+    @media screen and (max-width: 400px) {
+      gap: 15px;
+    }
 
     p {
       color: #ff4343;
