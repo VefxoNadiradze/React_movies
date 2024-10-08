@@ -10,6 +10,7 @@ import store from "./Redux/store";
 import Shows from "./Pages/Shows";
 import SingleMovie from "./Pages/SingleMovie";
 import SingleShow from "./Pages/SingleShow";
+import LoginRegister from "./Pages/LoginRegister";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         element: <SingleShow />,
       },
     ],
+  },
+  {
+    path: "/Register/:sign_in",
+    element: <LoginRegister />,
   },
 ]);
 

@@ -83,7 +83,7 @@ export default function Header() {
           </form>
         </div>
 
-        <Link to={"/"} className="autorization">
+        <Link to={`/Register/sign_in`} className="autorization">
           <span>Authorization</span>
           <FaUserCircle />
         </Link>
