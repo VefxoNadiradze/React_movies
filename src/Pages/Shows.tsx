@@ -71,15 +71,10 @@ const NotFound = styled.p`
 
 const LoadingDiv = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ShowsParent = styled.section`
